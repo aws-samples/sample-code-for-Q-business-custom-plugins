@@ -1707,6 +1707,7 @@ dependencies = [
  "aws-sdk-dynamodb",
  "lambda-web",
  "lambda_runtime 0.11.3",
+ "rand",
  "rocket",
  "serde",
  "tokio",

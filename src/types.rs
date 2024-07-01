@@ -1,5 +1,6 @@
 use rocket::Responder;
 use rocket::serde::{Deserialize, Serialize};
+use rocket::serde::json::Json;
 
 #[derive(Debug, Clone, Default, Deserialize, Serialize)]
 #[serde(crate = "rocket::serde")]
@@ -72,4 +73,11 @@ pub struct Cart {
     pub total_quantity: usize,
     pub cost: String,
     pub checkout_url: String,
+}
+
+#[derive(Responder)]
+pub  enum UIResponder<T> {
+    Ok(Json<T>),
+    #[response(status = 404)]
+    Err(())
 }

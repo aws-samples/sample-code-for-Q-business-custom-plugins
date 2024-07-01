@@ -9,22 +9,6 @@ use lambda_runtime::tracing;
 use aws_sdk_dynamodb as ddb;
 use serde::{Deserialize, Serialize};
 use lambda_web::{is_running_on_lambda, launch_rocket_on_lambda, LambdaError};
-use rocket::figment::util::bool_from_str_or_int;
-
-async fn game_server(state: &GameState) -> Result<(), Error> {
-    loop {
-        for player in state.players {
-            player.connection_id;
-
-            let req_body = {
-                "ConnectionId": "",
-                "Data":
-            }
-
-            let resp = reqwest::blocking::post("")
-        }
-    }
-}
 
 
 #[rocket::main]
@@ -33,11 +17,6 @@ async fn main() -> Result<(), LambdaError> {
 
     let config = aws_config::load_from_env().await;
     let table_name = std::env::var("TABLE_NAME").unwrap_or(String::from("q-apps-table"));
-
-    let game_state = {};
-
-    // "launch game server"
-    let game_server = tokio::spawn(game_server(&game_state));
 
     let rocket = rocket::build()
         .manage(ddb::Client::new(&config))
@@ -55,6 +34,5 @@ async fn main() -> Result<(), LambdaError> {
         let _ = rocket.launch().await?;
     }
     
-    let _ = game_server.await;
     Ok(())
 }
