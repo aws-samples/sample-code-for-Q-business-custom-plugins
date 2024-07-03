@@ -20,7 +20,7 @@ async fn main() -> Result<(), LambdaError> {
 
     let rocket = rocket::build()
         .manage(ddb::Client::new(&config))
-        .manage(table_name)
+        .manage(table_name.as_str())
         .mount("/", routes![
             create_cart, add_to_cart, get_cart, update_cart, remove_from_cart, 
             get_product, get_products,
