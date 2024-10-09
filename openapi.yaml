@@ -1,0 +1,113 @@
+openapi: 3.0.0
+info:
+  title: Shopping Cart API
+  version: 1.0.0
+  description: API for managing products in a shopping cart system
+
+servers:
+  - url: https://api.example.com/v1
+
+paths:
+  /products:
+    post:
+      summary: Search for products
+      description: Searches for products based on the provided search criteria in the request body.
+      operationId: getProducts
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The name of the product to find as a string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+  /q/product/search/{val}:
+    get:
+      summary: Quick search for products
+      description: Performs a quick search for products based on a search value in the product description.
+      operationId: qSearchProduct
+      tags:
+        - Products
+      parameters:
+        - name: val
+          in: path
+          required: true
+          description: The search value to look for in product descriptions.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Product:
+      type: object
+      description: Represents a product in the shopping cart system.
+      properties:
+        partition_key:
+          type: string
+          description: The partition key for the product (always "PRODUCT").
+        sort_key:
+          type: string
+          description: The sort key for the product (usually the product name).
+        id:
+          type: string
+          description: The unique identifier for the product.
+        name:
+          type: string
+          description: The name of the product.
+        description:
+          type: string
+          description: A detailed description of the product.
+        inventory:
+          type: integer
+          description: The current inventory count of the product.
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+          description: Product images.
+      required:
+        - partition_key
+        - sort_key
+        - id
+        - name
+        - description
+        - inventory
+
+    Image:
+      type: object
+      description: Represents an image associated with a product.
+      properties:
+        url:
+          type: string
+          description: The URL of the image.
+        alt_text:
+          type: string
+          description: Alternative text for the image.
