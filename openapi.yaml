@@ -8,6 +8,34 @@ servers:
   - url: https://api.example.com/v1
 
 paths:
+  /products:
+    post:
+      summary: Search for products
+      description: Searches for products based on the provided search criteria in the request body.
+      operationId: getProducts
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The name of the product to find as a string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+
   /q/product/search/{val}:
     get:
       summary: Quick search for products
