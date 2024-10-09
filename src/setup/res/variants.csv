@@ -1,0 +1,23 @@
+category,product,name,variant_name,option_name
+baby,cap,Baby Cap,black,color
+baby,cap,Baby Cap,gray,color
+baby,cap,Baby Cap,white,color
+baby,onesie,Baby Onesie,white,color
+baby,onesie,Baby Onesie,black,color
+baby,onesie,Baby Onesie,beige,color
+bags,bag,Bag,black,color
+bags,bag,Bag,white,color
+clothing,bomber-jacket,Bomber Jacket,black,color
+clothing,bomber-jacket,Bomber Jacket,army,color
+clothing,cowboy-hat,Cowboy Hat,black,color
+clothing,cowboy-hat,Cowboy Hat,tan,color
+clothing,t-shirt,T-Shirt,black,color
+clothing,t-shirt,T-Shirt,white,color
+clothing,t-shirt,T-Shirt,pink,color
+clothing,t-shirt,T-Shirt,blue,color
+clothing,t-shirt,T-Shirt,gray,color
+clothing,t-shirt,T-Shirt,circles-black,color
+clothing,t-shirt,T-Shirt,circles-blue,color
+clothing,t-shirt,T-Shirt,circles-white,color
+home,cup,Cup,black,color
+home,cup,Cup,white,color
