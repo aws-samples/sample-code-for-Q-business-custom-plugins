@@ -4,12 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "lambda"
-path = "src/lambda/main.rs"
-
-[[bin]]
-name = "setup"
-path = "src/setup/main.rs"
+name = "api"
+path = "src/main.rs"
 
 
 

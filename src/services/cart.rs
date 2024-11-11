@@ -101,7 +101,7 @@ pub async fn add_to_cart(
 )]
 pub async fn remove_from_cart(
     cart_id: &str,
-    delete_from_cart: Json<CartProduct>,
+    delete_from_cart: String,
     db: &State<ddb::Client>,
     table_name: &State<String>,
 ) -> UIResponder<Cart> {
@@ -113,7 +113,7 @@ pub async fn remove_from_cart(
                 cart.products = cart
                     .products
                     .into_iter()
-                    .filter(|p| p.product.id != delete_from_cart.product.id)
+                    .filter(|p| p.product.id != delete_from_cart)
                     .collect();
 
                 let item = to_item(cart.clone()).expect("Failed to turn cart into item");

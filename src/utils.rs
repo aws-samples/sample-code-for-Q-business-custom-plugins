@@ -2,7 +2,7 @@ use aws_sdk_dynamodb as ddb;
 use aws_sdk_dynamodb::operation::query::QueryOutput;
 use aws_sdk_dynamodb::types::AttributeValue;
 use serde::{Deserialize, Serialize};
-use serde_dynamo::{from_item, from_items};
+use serde_dynamo::from_items;
 use std::fmt::Debug;
 
 pub fn reconstruct_results<'a, T>(results: QueryOutput) -> Result<Vec<T>, String>
