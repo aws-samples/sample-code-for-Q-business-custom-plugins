@@ -1,6 +1,5 @@
 use crate::types::{Category, Image, Product, ProductOption, ProductVariant};
-use aws_config::default_provider::credentials::DefaultCredentialsChain;
-use aws_config::{Region, SdkConfig};
+use aws_config::{SdkConfig};
 use aws_sdk_dynamodb::Client;
 use image::GenericImageView;
 use rand::seq::SliceRandom;
@@ -8,7 +7,6 @@ use rand::{thread_rng, Rng};
 use serde::Deserialize;
 use serde_dynamo::to_item;
 use std::collections::HashMap;
-use std::fs::File;
 use uuid::Uuid;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -30,6 +28,9 @@ struct CSVOptions {
     variant_name: String,
     option_name: String,
 }
+
+static PRODUCTS_FILE: &'static str = include_str!("./res/products.csv");
+static VARIANTS_FILE: &'static str = include_str!("./res/variants.csv");
 
 pub async fn setup(config: SdkConfig, table_name: String) {
     let client = Client::new(&config);
@@ -133,15 +134,8 @@ fn csv_to_data() -> (Vec<Product>, HashMap<String, Category>) {
     let mut csv_products: Vec<CSVProduct> = Vec::new();
     let mut csv_options: Vec<CSVOptions> = Vec::new();
 
-    let products_file = match File::open("products.csv") {
-        Ok(file) => file,
-        Err(e) => panic!("Required file not found: {}", e),
-    };
-
-    let variants_file = match File::open("variants.csv") {
-        Ok(file) => file,
-        Err(e) => panic!("Required file not found: {}", e),
-    };
+    let products_file = std::io::Cursor::new(PRODUCTS_FILE);
+    let variants_file = std::io::Cursor::new(VARIANTS_FILE);
 
     let mut product_rdr = csv::Reader::from_reader(products_file);
     for result in product_rdr.deserialize() {

@@ -13,7 +13,6 @@ path = "src/main.rs"
 csv = "1.3.0"
 rand = "0.8.5"
 futures = "0.3.30"
-aws-sdk-s3 = "1.47.0"
 lambda_runtime = "0.13.0"
 aws-sdk-dynamodb = "1.43.0"
 serde_json = { version = "1.0.127" }

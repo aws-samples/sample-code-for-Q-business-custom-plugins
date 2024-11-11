@@ -38,7 +38,7 @@ Resources:
     Metadata:
       BuildMethod: rust-cargolambda # More info about Cargo Lambda: https://github.com/cargo-lambda/cargo-lambda
       BuildProperties:
-        Binary: lambda
+        Binary: api
     Properties:
       CodeUri: ./ # Points to dir of Cargo.toml
       Handler: bootstrap # Do not change, as this is the default executable name produced by Cargo Lambda
