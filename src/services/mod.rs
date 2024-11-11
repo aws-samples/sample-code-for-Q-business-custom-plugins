@@ -1,4 +1,4 @@
 pub mod cart;
 pub mod product;
 pub mod ui;
-mod q;
+pub mod q;

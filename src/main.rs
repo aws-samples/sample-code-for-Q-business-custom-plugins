@@ -4,14 +4,11 @@ mod types;
 mod utils;
 mod setup;
 
-#[macro_use]
-extern crate tracing;
-
 use aws_config::default_provider::credentials::DefaultCredentialsChain;
 use aws_config::default_provider::region::DefaultRegionChain;
 use aws_sdk_dynamodb as ddb;
-use rocket_prometheus::{PrometheusMetrics};
 use rocket::{self, routes};
+use services::q::*;
 use services::product::*;
 use aws_config::Region;
 use services::cart::*;
@@ -46,16 +43,11 @@ async fn main() -> Result<(), rocket::Error> {
         .merge(("address", rocket_address))
         .merge(("port", rocket_port.parse::<u16>().unwrap()));
 
-    let prometheus = PrometheusMetrics::new();
-
-    // let tracing = init_tracing_subscriber();
-
     setup::setup(config.clone(), table_name.clone()).await;
 
     let rocket = rocket::custom(rocket_config)
         .manage(ddb::Client::new(&config))
         .manage(table_name)
-        .attach(prometheus.clone())
         .mount(
             "/",
             routes![
@@ -71,10 +63,10 @@ async fn main() -> Result<(), rocket::Error> {
                 get_category,
                 get_category_products,
                 get_categories,
-                get_collection
+                get_collection,
+                q_search_product
             ],
-        )
-        .mount("/metrics", prometheus);
+        );
 
     let _rocket = rocket.launch().await?;
 
