@@ -7,7 +7,15 @@ and carts.
 
 The intent is to leverage this API in a natural language through Q Business Custom
 Plugins and demonstrate how pre-existing custom applications for enterprise
-can be leveraged through Generative AI and Q business.
+can be re-imagined through Generative AI and Q business.
+
+**Disclaimer:** Sample code, software libraries, command line tools, proofs of concept, templates,
+or other related technology are provided as AWS Content or Third-Party Content under the AWS Customer Agreement,
+or the relevant written agreement between you and AWS (whichever applies). You should not use this AWS Content or
+Third-Party Content in your production accounts, or on production or other critical data. You are responsible for testing,
+securing, and optimizing the AWS Content or Third-Party Content, such as sample code, as appropriate for production grade
+use based on your specific quality control practices and standards. Deploying AWS Content or Third-Party Content may incur
+AWS charges for creating or using AWS chargeable resources, such as running Amazon EC2 instances or using Amazon S3 storage.
 
 ## Architecture
 
@@ -42,39 +50,6 @@ This architecture defines the current state of the application.
 - `GET /pages`: Retrieves a list of all pages.
 - `GET /page/<page_id>`: Retrieves details of a specific page.
 
-### To Do for Workshop
-Wishlist service: Write a wishlist service that maintains wishlists for each individual user with name, Products, and
-all other things normal to a wishlist.
-
-We expect it to have the following routes:
-- `POST /wishlist/new`: Creates a new wishlist
-- `POST /wishlist/<wishlist_id>/add`: Adds a product to the wishlist
-- `GET /wishlist/<wishlist_id>`: Retrieves the contents of the wishlist
-- `POST /wishlist/<wishlist_id>/remove/<product_id>`: Removes a product from the wishlist
-
-Sample prompt you can use to generate a skeleton for the wishlist service:
-```
-Implement the following routes:
-
-- POST /wishlist/new: Creates a new wishlist, returns wishlist ID.
-- POST /wishlist/<wishlist_id>/add: Adds a product to the specified wishlist.
-- GET /wishlist/<wishlist_id>: Retrieves the contents of the specified wishlist.
-- POST /wishlist/<wishlist_id>/remove/<product_id>: Removes a product from the wishlist.
-
-Use AWS dynamodb to persist wishlist data (database or in-memory). Design for concurrent requests, scalability, and performance.
-
-Requirements:
-
-- Proper error handling and HTTP status codes.
-- Unit tests for correctness.
-- Code documentation and Rust best practices.
-- Authentication and authorization for accessing/modifying wishlists.
-- Consider caching mechanisms for performance.
-
-Generate the Rust code for the wishlist service, including data structures, routes, handlers.
-Explain your implementation and design decisions briefly.
-```
-
 ## Deployment Guide
 
 To deploy this application to AWS Lambda, follow these steps:
@@ -82,3 +57,11 @@ To deploy this application to AWS Lambda, follow these steps:
 1. **Set up AWS Credentials**: Configure your AWS credentials using the AWS CLI or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 3. **Use SAM CLI to deploy the backend**: Install the [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) use the command `sam build --beta-features && sam deploy`
 4. **Provide the API output to the frontend**: The SAM CLI will provide an output called `ShoppingCartApi` with a link, pass that link to the amplify environment variable `API_BASE_URL` allowing your frontend to access the API.
+
+Finally, to connect it to Q Business, ensure you have an application setup in Q Business,
+follow the guide [setting up a Q Business application](),then,
+[connect a custom plugin through the Q Business administrative dashboard]()
+with the included [openapi.yaml](./openapi.yaml) file.
+
+Now, you're ready to experience a taste of the future of conversational enterprise
+applications.
