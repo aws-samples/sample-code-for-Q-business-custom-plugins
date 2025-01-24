@@ -1,4 +1,3 @@
-
 # Q Business Custom Plugins
 
 This is a serverless application built with Rust and AWS Lambda that provides a
@@ -50,6 +49,7 @@ This architecture defines the current state of the application.
 - `GET /menu`: Retrieves the menu structure (categories and collections).
 - `GET /pages`: Retrieves a list of all pages.
 - `GET /page/<page_id>`: Retrieves details of a specific page.
+
 ## Deployment Guide
 To deploy this application to AWS Lambda, follow these steps:
 1. **Set up AWS Credentials**: Configure your AWS credentials using the AWS CLI or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
@@ -60,3 +60,11 @@ Finally, to connect it to Q Business, ensure you have an application setup in Q 
 follow the guide [setting up a Q Business application](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-app.html),then,
 [connect a custom plugin through the Q Business administrative dashboard](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/custom-plugin.html)
 with the included [openapi.yaml](./openapi.yaml) file.
+
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
