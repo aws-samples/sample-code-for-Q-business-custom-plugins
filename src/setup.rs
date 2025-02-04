@@ -2,11 +2,11 @@ use crate::types::{Category, Image, Product, ProductOption, ProductVariant};
 use aws_config::{SdkConfig};
 use aws_sdk_dynamodb::Client;
 use image::GenericImageView;
-use rand::seq::SliceRandom;
-use rand::{thread_rng, Rng};
+use rand::{rng, Rng};
 use serde::Deserialize;
 use serde_dynamo::to_item;
 use std::collections::HashMap;
+use rand::prelude::IteratorRandom;
 use uuid::Uuid;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -95,9 +95,8 @@ pub async fn setup(config: SdkConfig, table_name: String) {
     }
 
     let front_page_products: Vec<Product> = products
-        .choose_multiple(&mut thread_rng(), 3)
-        .cloned()
-        .collect();
+        .into_iter()
+        .choose_multiple(&mut rng(), 3);
 
     let front_page_category = Category {
         partition_key: "CATEGORY".to_string(),

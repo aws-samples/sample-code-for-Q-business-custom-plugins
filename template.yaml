@@ -54,6 +54,7 @@ Resources:
         Variables:
           TABLE_NAME: !Ref ShoppingTable
           ROCKET_PORT: 8080
+      ReservedConcurrentExecutions: 1
       Timeout: 30
     Connectors:
       DbConnector:
