@@ -63,4 +63,10 @@ follow the guide [setting up a Q Business application](https://docs.aws.amazon.c
 [connect a custom plugin through the Q Business administrative dashboard](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/custom-plugin.html)
 with the included [openapi.yaml](./openapi.yaml) file.
 
+## Security
 
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the LICENSE file.
