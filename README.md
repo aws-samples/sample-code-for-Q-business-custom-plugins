@@ -19,7 +19,8 @@ AWS charges for creating or using AWS chargeable resources, such as running Amaz
 
 ## Architecture
 
-This architecture defines the current state of the application.
+This architecture defines the current state of the application. However, for this demo we're not going to host the NextJS
+application as that does not serve any purpose.
 
 ![sls-shopping-cart.svg](./docs/images/sls-shopping-cart.svg)
 
@@ -53,8 +54,10 @@ This architecture defines the current state of the application.
 ## Deployment Guide
 To deploy this application to AWS Lambda, follow these steps:
 1. **Set up AWS Credentials**: Configure your AWS credentials using the AWS CLI or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
-3. **Use SAM CLI to deploy the backend**: Install the [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) use the command `sam build --beta-features && sam deploy`
-4. **Provide the API output to Q Business**: The SAM CLI will provide an output called `ShoppingCartApi` with a link to the API, take that link and add it to the [openapi.yaml](./openapi.yaml) file at the top under servers, url.
+2. **Use SAM CLI to deploy the backend**: Install the [SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) 
+use the command `sam build --beta-features && sam deploy`
+3. **Provide the API output to Q Business**: The SAM CLI will provide an output called `ShoppingCartApi` with a link to 
+the API, take that link and add it to the [openapi.yaml](./openapi.yaml) file at the top under servers, url.
 
 Finally, to connect it to Q Business, ensure you have an application setup in Q Business,
 follow the guide [setting up a Q Business application](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-app.html), then,
