@@ -1,17 +1,17 @@
 #![allow(warnings)]
 mod services;
+mod setup;
 mod types;
 mod utils;
-mod setup;
 
 use aws_config::default_provider::credentials::DefaultCredentialsChain;
 use aws_config::default_provider::region::DefaultRegionChain;
+use aws_config::Region;
 use aws_sdk_dynamodb as ddb;
 use rocket::{self, routes};
-use services::q::*;
-use services::product::*;
-use aws_config::Region;
 use services::cart::*;
+use services::product::*;
+use services::q::*;
 use services::ui::*;
 
 #[rocket::main]

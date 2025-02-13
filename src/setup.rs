@@ -1,12 +1,12 @@
 use crate::types::{Category, Image, Product, ProductOption, ProductVariant};
-use aws_config::{SdkConfig};
+use aws_config::SdkConfig;
 use aws_sdk_dynamodb::Client;
 use image::GenericImageView;
+use rand::prelude::IteratorRandom;
 use rand::{rng, Rng};
 use serde::Deserialize;
 use serde_dynamo::to_item;
 use std::collections::HashMap;
-use rand::prelude::IteratorRandom;
 use uuid::Uuid;
 
 #[derive(Deserialize, Debug, Clone)]
@@ -17,7 +17,7 @@ struct CSVProduct {
     image_number: u32,
     file: String,
     image_height: u32,
-    image_width: u32
+    image_width: u32,
 }
 
 #[derive(Deserialize, Debug, Clone)]
@@ -94,9 +94,7 @@ pub async fn setup(config: SdkConfig, table_name: String) {
         };
     }
 
-    let front_page_products: Vec<Product> = products
-        .into_iter()
-        .choose_multiple(&mut rng(), 3);
+    let front_page_products: Vec<Product> = products.into_iter().choose_multiple(&mut rng(), 3);
 
     let front_page_category = Category {
         partition_key: "CATEGORY".to_string(),
@@ -205,16 +203,11 @@ fn csv_to_data() -> (Vec<Product>, HashMap<String, Category>) {
                 };
                 prod_imgs
                     .iter()
-                    .map(|image| {
-                        Image {
-                            url: format!(
-                                "/images/{}",
-                                image.to_string()
-                            ),
-                            alt_text: format!("{} image", csv_product.name),
-                            width: csv_product.image_width as usize,
-                            height: csv_product.image_height as usize,
-                        }
+                    .map(|image| Image {
+                        url: format!("/images/{}", image.to_string()),
+                        alt_text: format!("{} image", csv_product.name),
+                        width: csv_product.image_width as usize,
+                        height: csv_product.image_height as usize,
                     })
                     .collect()
             },
