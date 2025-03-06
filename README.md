@@ -1,6 +1,8 @@
 # Q Business Custom Plugins Monorepo
 
-Welcome to the Q Business Custom Plugins Monorepo! This repository contains a collection of examples demonstrating how to build serverless applications with Rust and AWS Lambda for integration with Q Business. Each example showcases different aspects of developing custom plugins for Q Business, leveraging AWS services like DynamoDB, API Gateway, and Lambda.
+Welcome to the Q Business Custom Plugins Monorepo! This repository contains a collection of examples demonstrating how 
+to build serverless applications for integration with Q Business. Each example showcases different aspects of developing
+custom plugins for Q Business, leveraging AWS services like DynamoDB, API Gateway, and Lambda.
 
 **Disclaimer:** Sample code, software libraries, command line tools, proofs of concept, templates,
 or other related technology are provided as AWS Content or Third-Party Content under the AWS Customer Agreement,
