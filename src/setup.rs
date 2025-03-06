@@ -5,7 +5,7 @@ use image::GenericImageView;
 use rand::prelude::IteratorRandom;
 use rand::{rng, Rng};
 use serde::Deserialize;
-use serde_dynamo::to_item;
+use serde_dynamo::{to_attribute_value, to_item};
 use std::collections::HashMap;
 use uuid::Uuid;
 
@@ -35,13 +35,8 @@ static VARIANTS_FILE: &'static str = include_str!("./res/variants.csv");
 pub async fn setup(config: SdkConfig, table_name: String) {
     let client = Client::new(&config);
 
-    let scan_output = client
-        .scan()
-        .table_name(&table_name)
-        .send()
-        .await
-        .expect("Failed to scan table");
-    if !scan_output.items().is_empty() {
+    // Check if the table has been set up by looking for a specific item
+    if is_table_setup(&client, &table_name).await {
         println!("Table already has items, skipping setup");
         return;
     }
@@ -125,6 +120,31 @@ pub async fn setup(config: SdkConfig, table_name: String) {
             println!("Error putting front page category: {:?}", e);
         }
     };
+}
+
+async fn is_table_setup(client: &Client, table_name: &str) -> bool {
+    let check_item_key = HashMap::from([
+        (
+            "partition_key".to_string(),
+            to_attribute_value("CATEGORY".to_string()).unwrap(),
+        ),
+        (
+            "sort_key".to_string(),
+            to_attribute_value("FRONT_PAGE".to_string()).unwrap(),
+        ),
+    ]);
+
+    let response = client
+        .get_item()
+        .table_name(table_name)
+        .set_key(Some(check_item_key))
+        .send()
+        .await;
+
+    match response {
+        Ok(resp) => resp.item.is_some(),
+        Err(_) => false,
+    }
 }
 
 fn csv_to_data() -> (Vec<Product>, HashMap<String, Category>) {
