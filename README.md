@@ -1,6 +1,6 @@
 # Q Business Custom Plugins Monorepo
 
-Welcome to the Q Business Custom Plugins Monorepo! This repository contains a collection of examples demonstrating how 
+Welcome to the Q Business Custom Plugins Monorepo! This repository contains a collection of examples demonstrating how
 to build serverless applications for integration with Q Business. Each example showcases different aspects of developing
 custom plugins for Q Business, leveraging AWS services like DynamoDB, API Gateway, and Lambda.
 
@@ -22,11 +22,7 @@ The following table lists the available examples, each linked to its respective 
 
 | Example Name          | Description                                                                                                                                                       | Link                                |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| Example 1: Swag Store | A serverless application providing a backend for an internal swag platform, handling products, inventory, categories and several specifics for a customizable UI. | [Swag Store](./examples/swag_store) | 
-
-## Services
-
-Each example demonstrates different services:
+| Example 1: Swag Store | A serverless application providing a backend for an internal swag platform, handling products, inventory, categories and several specifics for a data driven UI.  | [Swag Store](./examples/swag_store) |
 
 ## Deployment Guide
 
